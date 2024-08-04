@@ -1,5 +1,9 @@
 from colorama import Fore, Back, Style
 
+templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
+textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+
+
 def main():
     print(Fore.LIGHTGREEN_EX + "What do you want to run")
     run = input("(r)emixer, (w)ord thingy: ").lower()
@@ -30,13 +34,13 @@ def wordthing():
     if input("Press enter to start wording !!! Press 0 to cancel and go back : ") == "0":
         main()
 
-    openziesvar = input("Use temp (enter) or write your own!! : ")
+    openziesvar = input("Use temp (enter) or write your own!! (no-txt) !!! : ")
 
     if openziesvar.upper() == "":
-        openzies("temp.txt")
-        openziesvar = "temp.txt"
+        openzies(templocation)
+        openziesvar = templocation
     else:
-        openzies(openziesvar)
+        openzies(f"{textslocation}{openziesvar}.txt")
 
     val_mega = len(texval)
     listval = []
@@ -107,14 +111,15 @@ def wordthing():
         listval.extend([val_a, val_b, val_c, val_d, val_e, val_f, val_g, val_h, val_j, val_k, val_l, val_m, val_n, val_o, val_p, val_q, val_r, val_s, val_t, val_u, val_v, val_w, val_x, val_y, val_z])
 
         for i in listval:
-            listpercent.append(str(listval.index(i)) + ": " + str(round((i / val_mega * 100), 6)))
+            listpercent.append(f": {round((i / val_mega * 100), 6)}")
     def printw():
         print("---------------------------------------------")
 
         print(listval)
 
-        for elem in listpercent:
-            print(elem + "%")
+        for number, letter in enumerate(listpercent):
+            print(chr(number + 65), letter)
+
     def megalist(x):
         global megatxt
         megatxt = listnew.pop(x)
@@ -122,6 +127,9 @@ def wordthing():
     def percent_calc(txt):
 
         val_text_mega = len(txt) - 1
+        if val_text_mega == 0:
+            val_text_mega = 1
+
         print(str(val_text_mega) + "!!! characters!!!")
 
         val_a = txt.count("A")
@@ -154,12 +162,15 @@ def wordthing():
         listmegaval.extend([val_a, val_b, val_c, val_d, val_e, val_f, val_g, val_h, val_j, val_k, val_l, val_m, val_n, val_o, val_p, val_q, val_r, val_s, val_t, val_u, val_v, val_w, val_x, val_y, val_z])
 
         for i in listmegaval:
-            listmegapercent.append(str(listmegaval.index(i)) + ": " + str(round((i / val_text_mega * 100), 6)))
+            listmegapercent.append(f": {round((i / val_text_mega * 100), 6)}")
 
     def inttest():
-        listem(openziesvar)
 
         o = int(input(f"please select index of list (1-{len(listnew)}): ")) - 1
+        if 1 > o > len(listnew):
+            print("oops!! too long !!!")
+            inttest()
+
         megalist(o)
         print(megatxt)
         percent_calc(megatxt)
@@ -167,15 +178,9 @@ def wordthing():
 
         print(listmegaval)
 
-        for elem in listmegapercent:
-            print(elem + "%")
+        for number, letter in enumerate(listmegapercent):
+            print(number + 1, letter)
 
-        if input("type 0 to do again: ") == "0":
-            inttest()
-        else:
-            print("")
-            print("Thank you so much !!!")
-            main()
 
 
     #running wordthing
@@ -194,12 +199,19 @@ def wordthing():
     printw()
 
     if input("0 for intensive test: ") == "0":
-
+        listem(openziesvar)
         inttest()
+        if input("type 0 to do again: ") == "0":
+            inttest()
+        else:
+            print("")
+            print("Thank you so much !!!")
+            main()
     else:
         print("")
         print("Thank you so much !!!")
         main()
+
 
 def remixer():
     print(Fore.LIGHTRED_EX + Style.BRIGHT + "This is the remixer !!! Deleting your special characters since 1995")
@@ -209,7 +221,7 @@ def remixer():
         main()
 
     fileinput = input("Write your filename please (no.txt) !!! :")
-    filemane = f"./texts/{fileinput}.txt"
+    filemane = f"{textslocation}{fileinput}.txt"
     enco = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
 
     if enco == "1":
@@ -254,7 +266,7 @@ def remixer():
 
 
 
-    temp = open("temp.txt", "w", encoding="utf8").write(meganewtxt)
+    temp = open(templocation, "w", encoding="utf8").write(meganewtxt)
 
     if input("0 to print: ") == "0":
         print(meganewtxt)
