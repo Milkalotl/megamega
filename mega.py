@@ -112,11 +112,13 @@ def wordthing():
     for elem in val_val_aw:
         print(elem + "%")
 
+    if input("0 to print: ") == "0":
+            print(newlist)
+
     print("")
     print("Thank you so much !!!")
 
-    if input("0 to print: ") == "0":
-            print(newlist)
+
 def remixer():
     print(Fore.LIGHTRED_EX + Style.BRIGHT + "This is the remixer !!! Deleting your special characters since 1995")
     print(Style.RESET_ALL)
