@@ -208,7 +208,8 @@ def remixer():
     if input("Press enter to start remixing !!! Press 0 to cancel and go back : ") == "0":
         main()
 
-    filemane = input("Write your filename please (no.txt) !!! : ") + ".txt"
+    fileinput = input("Write your filename please (no.txt) !!! :")
+    filemane = f"./texts/{fileinput}.txt"
     enco = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
 
     if enco == "1":
