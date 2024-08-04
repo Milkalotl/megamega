@@ -1,25 +1,72 @@
 from colorama import Fore, Back, Style
 
-templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
-textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+def setup():
+    global templocation
+    global textslocation
+    templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
+    textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+
+    x = input("(c)ustom setup or (d)efault: ")
+
+    if x == "c":
+        templocation = input("set templocation directory: ")
+        textslocation = input("set textslocation directory: ")
+    else:
+        templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
+        textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+    if templocation == "":
+        templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
+    if textslocation == "":
+        textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+
 
 
 def main():
-    print(Fore.LIGHTGREEN_EX + "What do you want to run")
-    run = input("(r)emixer, (w)ord thingy: ").lower()
+    print(Fore.LIGHTGREEN_EX + "What do you want to run (run setup on first time)")
+
+
+    run = input("(r)emixer, (w)ord thingy, (s)etup: ").lower()
     if  run == "r":
-        remixer()
-        print("-----------------------\nWelcome back !!!")
-        main()
+        try:
+            templocation or textslocation
+        except NameError:
+            print("please set up first !!")
+            setup()
+            print("-----------------------\nAll set up !!!")
+            main()
+        else:
+            remixer()
+            print("-----------------------\nAll remixed up !!!")
+            main()
 
     elif run == "w":
-        wordthing()
-        print("-----------------------\nWelcome back !!!")
+        try:
+            templocation or textslocation
+        except NameError:
+            print("please set up first !!")
+            setup()
+            print("-----------------------\nAll set up !!!")
+            main()
+        else:
+            wordthing()
+            print("-----------------------\nWorded !!!")
+            main()
+
+    elif run == "s":
+        setup()
+        print("-----------------------\nAll set up !!!")
         main()
 
     else:
-        print("-----------------------\nWelcome back !!!")
-        main()
+        try:
+            templocation or textslocation
+        except NameError:
+            setup()
+            print("-----------------------\nAll set up !!!")
+            main()
+        else:
+            print("-----------------------\nWelcome back !!!")
+            main()
 
 def wordthing():
     print(Fore.LIGHTCYAN_EX + Style.BRIGHT +"Welcome to the word thingy !!! Please follow the instructionszzz")
@@ -40,7 +87,13 @@ def wordthing():
         openzies(templocation)
         openziesvar = templocation
     else:
-        openzies(f"{textslocation}{openziesvar}.txt")
+        try:
+            openzies(f"{textslocation}{openziesvar}.txt")
+        except:
+            print("No file found !!! Try again !!!")
+            wordthing()
+        else:
+            openzies(f"{textslocation}{openziesvar}.txt")
 
     val_mega = len(texval)
     listval = []
@@ -119,11 +172,9 @@ def wordthing():
 
         for number, letter in enumerate(listpercent):
             print(chr(number + 65), letter)
-
     def megalist(x):
         global megatxt
         megatxt = listnew.pop(x)
-
     def percent_calc(txt):
 
         val_text_mega = len(txt) - 1
@@ -214,15 +265,16 @@ def wordthing():
 
 
 def remixer():
-    print(Fore.LIGHTRED_EX + Style.BRIGHT + "This is the remixer !!! Deleting your special characters since 1995")
+    print(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★")
     print(Style.RESET_ALL)
 
-    if input("Press enter to start remixing !!! Press 0 to cancel and go back : ") == "0":
+    if input("Press enter to start "+ f"{Fore.LIGHTRED_EX}{Style.BRIGHT}remixing"+ Style.RESET_ALL +"!!! Press 0 to cancel and go back : ") == "0":
         main()
 
     fileinput = input("Write your filename please (no.txt) !!! :")
     filemane = f"{textslocation}{fileinput}.txt"
     enco = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
+
 
     if enco == "1":
         realenco = "latin1"
@@ -231,8 +283,13 @@ def remixer():
     else:
         realenco = input("Please specify: ")
 
-
-    text= open(filemane, encoding=realenco).read()
+    try:
+        open(filemane, encoding=realenco)
+    except:
+        print("oops wrong file name or encoding! Try again !!!")
+        remixer()
+    else:
+        text = open(filemane, encoding=realenco).read()
 
     question = input("please specify if you want line breaks (1), no line breaks (2), or spaces AND linebreaks (3): ")
 
