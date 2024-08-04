@@ -3,6 +3,7 @@ from colorama import Fore, Back, Style
 def setup():
     global templocation
     global textslocation
+
     templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
     textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
 
@@ -11,6 +12,9 @@ def setup():
     if x == "c":
         templocation = input("set templocation directory: ")
         textslocation = input("set textslocation directory: ")
+
+        if input("Save to file? (y) (n)") == "y":
+            main()
     else:
         templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
         textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
