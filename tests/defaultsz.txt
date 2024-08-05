@@ -1,0 +1,3 @@
+"/home/mooky/PycharmProjects/megamega/temp.txt"
+"/home/mooky/PycharmProjects/megamega/texts/"
+"/home/mooky/PycharmProjects/megamega/defaults.txt"

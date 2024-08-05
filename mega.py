@@ -1,6 +1,28 @@
 from colorama import Fore, Back, Style
 from ascii_magic import AsciiArt
 
+deflist = []
+
+with open("defaults.txt", encoding="utf8") as file:
+    while line := file.readline():
+        deflist.append(line)
+
+
+
+defaulttemp = deflist[0]
+defaulttexts = deflist[1]
+
+
+def custom_setup():
+
+    templocation = input("set templocation directory: ")
+    textslocation = input("set textslocation directory: ")
+
+    if input("Save to file? (y) (n)") == "y":
+        with open(deflocation, encoding="utf8") as file:
+            file.write(f"{templocation}\n{textslocation}")
+
+        main()
 
 def setup():
     global templocation
@@ -12,11 +34,7 @@ def setup():
     x = input("(c)ustom setup or (d)efault: ")
 
     if x == "c":
-        templocation = input("set templocation directory: ")
-        textslocation = input("set textslocation directory: ")
-
-        if input("Save to file? (y) (n)") == "y":
-            main()
+        custom_setup()
     else:
         templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
         textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
