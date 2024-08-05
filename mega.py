@@ -1,4 +1,6 @@
 from colorama import Fore, Back, Style
+from ascii_magic import AsciiArt
+
 
 def setup():
     global templocation
@@ -26,10 +28,14 @@ def setup():
 
 
 def main():
-    print(Fore.LIGHTGREEN_EX + "What do you want to run (run setup on first time)")
 
 
-    run = input("(r)emixer, (w)ord thingy, (s)etup: ").lower()
+    print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}{Back.BLACK}!!!!! WELCOME !!!!!{Back.RESET}")
+
+    print(f"{Back.RESET}What do you want to run (run setup on first time){Style.RESET_ALL}")
+
+
+    run = input(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}(r)emixer, {Fore.LIGHTCYAN_EX}(w)ord thingy, {Fore.LIGHTYELLOW_EX}(s)etup: {Style.RESET_ALL}").lower()
     if  run == "r":
         try:
             templocation or textslocation
@@ -61,6 +67,9 @@ def main():
         print("-----------------------\nAll set up !!!")
         main()
 
+    elif run == "sunny":
+        my_art = AsciiArt.from_image('sunny.png')
+        my_art.to_terminal()
     else:
         try:
             templocation or textslocation
@@ -73,8 +82,7 @@ def main():
             main()
 
 def wordthing():
-    print(Fore.LIGHTCYAN_EX + Style.BRIGHT +"Welcome to the word thingy !!! Please follow the instructionszzz")
-    print(Style.RESET_ALL)
+    print(f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}Welcome to the word thingy !!! Please follow the instructionszzz{Style.RESET_ALL}")
 
     # declaring variables and opening temp
     def openzies(x:str):
@@ -185,7 +193,7 @@ def wordthing():
         if val_text_mega == 0:
             val_text_mega = 1
 
-        print(str(val_text_mega) + "!!! characters!!!")
+        print(f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}{val_text_mega}!!! characters!!!{Style.RESET_ALL}")
 
         val_a = txt.count("A")
         val_b = txt.count("B")
@@ -269,10 +277,10 @@ def wordthing():
 
 
 def remixer():
-    print(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★")
-    print(Style.RESET_ALL)
+    print(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★{Style.RESET_ALL}")
 
-    if input("Press enter to start "+ f"{Fore.LIGHTRED_EX}{Style.BRIGHT}remixing"+ Style.RESET_ALL +"!!! Press 0 to cancel and go back : ") == "0":
+
+    if input(f"Press enter to start{Fore.LIGHTRED_EX}{Style.BRIGHT} ★ remixing ★ {Style.RESET_ALL}!!! Press 0 to cancel and go back : ") == "0":
         main()
 
     fileinput = input("Write your filename please (no.txt) !!! :")
@@ -335,5 +343,7 @@ def remixer():
         print("thank you !!!")
 
 
+my_art = AsciiArt.from_image('welcome.png')
+my_art.to_terminal(columns=80, width_ratio=2.5)
 main()
 
