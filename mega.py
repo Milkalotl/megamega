@@ -1,5 +1,6 @@
 from colorama import Fore, Back, Style
 from ascii_magic import AsciiArt
+import time
 
 deflist = []
 
@@ -19,7 +20,7 @@ def custom_setup():
     textslocation = input("set textslocation directory: ")
 
     if input("Save to file? (y) (n)") == "y":
-        with open(deflocation, encoding="utf8") as file:
+        with open("defaults.txt", encoding="utf8") as file:
             file.write(f"{templocation}\n{textslocation}")
 
         main()
@@ -31,6 +32,13 @@ def setup():
     templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
     textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
 
+    try:
+        templocation or textslocation
+    except NameError:
+        setup()
+        print("-----------------------\nAll set up !!!")
+        main()
+def truesetup():
     x = input("(c)ustom setup or (d)efault: ")
 
     if x == "c":
@@ -46,42 +54,26 @@ def setup():
 
 
 def main():
-
-
     print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}{Back.BLACK}!!!!! WELCOME !!!!!{Back.RESET}")
-
     print(f"{Back.RESET}What do you want to run (run setup on first time){Style.RESET_ALL}")
 
 
+    setup()
     run = input(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}(r)emixer, {Fore.LIGHTCYAN_EX}(w)ord thingy, {Fore.LIGHTYELLOW_EX}(s)etup: {Style.RESET_ALL}").lower()
+
+
     if  run == "r":
-        try:
-            templocation or textslocation
-        except NameError:
-            print("please set up first !!")
-            setup()
-            print("-----------------------\nAll set up !!!")
-            main()
-        else:
-            remixer()
-            print("-----------------------\nAll remixed up !!!")
-            main()
+        remixer()
+        print("-----------------------\nAll remixed up !!!")
+        main()
 
     elif run == "w":
-        try:
-            templocation or textslocation
-        except NameError:
-            print("please set up first !!")
-            setup()
-            print("-----------------------\nAll set up !!!")
-            main()
-        else:
-            wordthing()
-            print("-----------------------\nWorded !!!")
-            main()
+        wordthing()
+        print("-----------------------\nWorded !!!")
+        main()
 
     elif run == "s":
-        setup()
+        setup(1)
         print("-----------------------\nAll set up !!!")
         main()
 
@@ -133,29 +125,20 @@ def wordthing():
     listmegaval = []
     listmegapercent = []
 
-    def customs (x,y,z):
-
-        texcus1 = str(x.upper())
-        texcus2 = str(y.upper())
-        texcus3 = str(z.upper())
-
-        val_cus1 = texval.count(texcus1)
-        val_cus2 = texval.count(texcus2)
-        val_cus3 = texval.count(texcus3)
-
-        val_final1 = (int(val_cus1) / val_mega * 100)
-        val_final2 = (int(val_cus2) / val_mega * 100)
-        val_final3 = (int(val_cus3) / val_mega * 100)
-
+    def customs (x="",y="",z=""):
         print("---------------------------------------------")
-
-        print("number of characters: " + str(val_mega))
-        print(texcus1 + ": " + str(val_cus1))
-        print("Percent: " + str(round((val_final1), 6)) + "%")
-        print(texcus2 + ": " + str(val_cus2))
-        print("Percent: " + str(round((val_final2), 6)) + "%")
-        print(texcus3 + ": " + str(val_cus3))
-        print("Percent: " + str(round((val_final3), 6)) + "%")
+        if x != "":
+            print("number of characters: " + str(val_mega))
+            print(f"{x.upper()}:{texval.count(x.upper())}")
+            print("Percent: " + str(round(((int(texval.count(x.upper())) / val_mega * 100)), 6)) + "%")
+        if y != "":
+            print("number of characters: " + str(val_mega))
+            print(f"{y.upper()}:{texval.count(y.upper())}")
+            print("Percent: " + str(round(((int(texval.count(y.upper())) / val_mega * 100)), 6)) + "%")
+        if z != "":
+            print("number of characters: " + str(val_mega))
+            print(f"{z.upper()}:{texval.count(z.upper())}")
+            print("Percent: " + str(round(((int(texval.count(z.upper())) / val_mega * 100)), 6)) + "%")
 
     #creates listnew (which is a list with every sentence as an element
     def listem(x:str):
@@ -271,7 +254,9 @@ def wordthing():
         x = input("letter: ")
         y = input("letter: ")
         z = input("letter: ")
-        customs(x,y,z)
+        if not ((x== "") and (y=="") and (z=="")):
+            customs(x,y,z)
+
     else:
         print("Ok! Startinnnnnnnnng")
 
@@ -331,6 +316,7 @@ def remixer():
                 newnewtxt += char
 
         meganewtxt = newnewtxt
+        end = time.time()
 
     elif question == "3":
         newtxt = text.upper()
@@ -354,11 +340,9 @@ def remixer():
 
 
     temp = open(templocation, "w", encoding="utf8").write(meganewtxt)
-
     if input("0 to print: ") == "0":
         print(meganewtxt)
-    else:
-        print("thank you !!!")
+    print("thank you !!!")
 
 
 my_art = AsciiArt.from_image('welcome.png')
