@@ -1,6 +1,7 @@
 from colorama import Fore, Back, Style
 from ascii_magic import AsciiArt
 import time
+import collections
 
 deflist = []
 
@@ -58,7 +59,7 @@ def main():
     print(f"{Back.RESET}What do you want to run (run setup on first time){Style.RESET_ALL}")
 
 
-    setup()
+
     run = input(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}(r)emixer, {Fore.LIGHTCYAN_EX}(w)ord thingy, {Fore.LIGHTYELLOW_EX}(s)etup: {Style.RESET_ALL}").lower()
 
 
@@ -80,6 +81,8 @@ def main():
     elif run == "sunny":
         my_art = AsciiArt.from_image('sunny.png')
         my_art.to_terminal()
+    elif run == "q" or "quit":
+        quit()
     else:
         try:
             templocation or textslocation
@@ -127,18 +130,16 @@ def wordthing():
 
     def customs (x="",y="",z=""):
         print("---------------------------------------------")
+        print(f"number of characters:{str(val_mega)}")
         if x != "":
-            print("number of characters: " + str(val_mega))
             print(f"{x.upper()}:{texval.count(x.upper())}")
-            print("Percent: " + str(round(((int(texval.count(x.upper())) / val_mega * 100)), 6)) + "%")
+            print(f"Percent:{str(round(((int(texval.count(x.upper())) / val_mega * 100)), 6))} %")
         if y != "":
-            print("number of characters: " + str(val_mega))
             print(f"{y.upper()}:{texval.count(y.upper())}")
-            print("Percent: " + str(round(((int(texval.count(y.upper())) / val_mega * 100)), 6)) + "%")
+            print(f"Percent:{str(round(((int(texval.count(y.upper())) / val_mega * 100)), 6))} %")
         if z != "":
-            print("number of characters: " + str(val_mega))
             print(f"{z.upper()}:{texval.count(z.upper())}")
-            print("Percent: " + str(round(((int(texval.count(z.upper())) / val_mega * 100)), 6)) + "%")
+            print(f"Percent:{str(round(((int(texval.count(z.upper())) / val_mega * 100)), 6))} %")
 
     #creates listnew (which is a list with every sentence as an element
     def listem(x:str):
@@ -286,7 +287,7 @@ def remixer():
     if input(f"Press enter to start{Fore.LIGHTRED_EX}{Style.BRIGHT} ★ remixing ★ {Style.RESET_ALL}!!! Press 0 to cancel and go back : ") == "0":
         main()
 
-    fileinput = input("Write your filename please (no.txt) !!! :")
+    fileinput = input("Write your filename please (no.txt) !!!: ")
     filemane = f"{textslocation}{fileinput}.txt"
     enco = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
 
@@ -309,19 +310,14 @@ def remixer():
     question = input("please specify if you want line breaks (1), no line breaks (2), or spaces AND linebreaks (3): ")
 
     if question == "2":
-        newtxt = text.upper()
-        newnewtxt = ""
-        for char in newtxt:
+        meganewtxt = ""
+        for char in text.upper():
             if ('A' <= char <= 'Z') or ('a' <= char <= 'z') or ('À' <= char <= 'ỿ'):
-                newnewtxt += char
-
-        meganewtxt = newnewtxt
-        end = time.time()
+                meganewtxt += char
 
     elif question == "3":
-        newtxt = text.upper()
         newnewtxt = ""
-        for char in newtxt:
+        for char in text.upper():
             if ('A' <= char <= 'Z') or ('a' <= char <= 'z') or ('À' <= char <= 'ỿ') or (char == ".") or (char == "?") or (char == "!") or (char == " "):
                 newnewtxt += char
 
@@ -329,9 +325,8 @@ def remixer():
 
 
     else:
-        newtxt = text.upper()
         newnewtxt = ""
-        for char in newtxt:
+        for char in text.upper():
             if ('A' <= char <= 'Z') or ('a' <= char <= 'z') or ('À' <= char <= 'ỿ') or (char == ".") or (char == "?") or ( char == "!"):
                 newnewtxt += char
 
@@ -345,7 +340,9 @@ def remixer():
     print("thank you !!!")
 
 
+
 my_art = AsciiArt.from_image('welcome.png')
 my_art.to_terminal(columns=80, width_ratio=2.5)
+setup()
 main()
 
