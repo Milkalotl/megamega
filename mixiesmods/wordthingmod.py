@@ -60,43 +60,37 @@ def wordthing(templocation, txtslocation):
                 listnew.append(line)
 
   #counts each individual letter
-    def temp (txtval, val_mega):
+    def charcounter (txt, lengthoftxt):
         # letter values !!!
-        mySet = set(txtval)
-        for element in mySet:
-            countOfChar = 0
-            for character in txtval:
-                if character == element:
-                    countOfChar += 1
-            print("{}: c: {} p:{}% ".format(element, countOfChar, f": {round((countOfChar / val_mega * 100), 6)}"))
+        print("Characters !!!\n")
 
-   #just printing
+        freq = {}
 
-   #uhh i dont really know i could probably fix this
+        for ele in txt:
+            if ele in freq:
+                freq[ele] += 1
+            else:
+                freq[ele] = 1
 
+        uni = 65
+        while uni < 592:
+            """
+            if uni == 73:
+                uni += 11
+            """
+            x = chr(uni)
+            try:
+                count = freq.get(x)
+                count / lengthoftxt
+            except TypeError:
+                uni += 1
+            else:
+                count = freq.get(x)
+                print(f"{x}: {count}, {round((count / lengthoftxt * 100), 6)}%")
+                uni += 1
 
-   #calculates percentages of each letter  (rework)
-    def percent_calc(txt):
-        val_txt_mega = len(txt) - 1
-        if val_txt_mega <= 0:
-            val_txt_mega = 1
-
-        print("!! characters!!!")
-        mySet = set(txt)
-        for element in mySet:
-            countOfChar = 0
-            for character in txt:
-                if character == element:
-                    countOfChar += 1
-            listmegaval.append(element, countOfChar)
-
-        for i in listmegaval:
-            listmegapercent.append(f": {round((i / val_txt_mega * 100), 6)}")
-
-
-
-
-   #indepth analysis
+        print("\n")
+    #indepth analysis
     def inttest():
         o = int(input(f"please select index of list (1-{len(listnew)}): ")) - 1
         try:
@@ -107,7 +101,10 @@ def wordthing(templocation, txtslocation):
 
         megatxt = str(listnew[o])
         print(megatxt)
-        percent_calc(megatxt)
+        val_txt_mega = len(megatxt) - 1
+        if val_txt_mega <= 0:
+            val_txt_mega = 1
+        charcounter(megatxt, val_txt_mega)
         print("---------------------------------------------")
 
         print(listmegaval)
@@ -132,15 +129,16 @@ def wordthing(templocation, txtslocation):
     else:
         print("Ok! Startinnnnnnnnng")
 
-    temp(txtval, val_mega)
+    charcounter(txtval, val_mega)
 
     if input("0 for intensive test: ") == "0":
-        w = 0
-        while w == 0:
+        w = "0"
+        while w == "0":
             listem(openziesvar)
             inttest()
             megatxt.clear
-            w = int(input("0 to do it again: "))
+            w = input("0 to do it again: ")
+
             
 
     else:
