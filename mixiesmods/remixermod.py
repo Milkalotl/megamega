@@ -10,6 +10,8 @@ def remixer(templocation,textslocation):
         y = f"{textslocation}{x}.txt"
         z = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
         return y,z
+
+
     filemane, enco = askforinput(textslocation)
     
     
@@ -23,7 +25,7 @@ def remixer(templocation,textslocation):
 
     try:
         open(filemane, encoding=enco)
-    except:
+    except FileNotFoundError:
         print("oops wrong file name or encoding! Try again !!!")
         remixer(templocation,textslocation)
     else:
@@ -43,7 +45,7 @@ def remixer(templocation,textslocation):
             if ('A' <= char <= 'Z') or ('a' <= char <= 'z') or ('À' <= char <= 'ỿ') or (char == ".") or (char == "?") or (char == "!") or (char == " "):
                 newnewtxt += char
 
-        meganewtxt = newnewtxt.replace(".", "\n").replace("?", "\n").replace("!", "\n")
+        meganewtxt = newnewtxt.replace(".", "\n").replace("?", "\n").replace("!", "\n").replace("\n\n","\n")
 
 
     else:
@@ -63,5 +65,5 @@ def remixer(templocation,textslocation):
 
 if __name__ == "__main__":
     def main():
-        remixer("/home/mooky/PycharmProjects/megamega/temp.txt", "/home/mooky/PycharmProjects/megamega/texts/")
+        remixer("/home/mooky/PycharmProjects/megamega/temp.txt", "/home/mooky/PycharmProjects/megamega/txts/")
     main()

@@ -48,11 +48,11 @@ def truesetup():
         custom_setup()
     else:
         templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
-        textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+        textslocation = "/home/mooky/PycharmProjects/megamega/txts/"
     if templocation == "":
         templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
     if textslocation == "":
-        textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+        textslocation = "/home/mooky/PycharmProjects/megamega/txts/"
 
 
 
