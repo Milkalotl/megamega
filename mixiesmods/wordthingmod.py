@@ -34,6 +34,7 @@ def wordthing(templocation,textslocation):
     listmegaval = []
     listmegapercent = []
 
+    #custom letters
     def customs (x="",y="",z=""):
         print("---------------------------------------------")
         print(f"number of characters:{str(val_mega)}")
@@ -48,10 +49,14 @@ def wordthing(templocation,textslocation):
             print(f"Percent:{str(round(((int(texval.count(z.upper())) / val_mega * 100)), 6))} %")
 
     #creates listnew (which is a list with every sentence as an element
+
+   #appends each line to a list as a separate element.
     def listem(x:str):
         with open(x) as file:
             while line := file.readline():
                 listnew.append(line)
+
+  #counts each individual letter
     def temp (texval, val_mega):
         # letter values !!!
         val_a = texval.count("A")
@@ -85,6 +90,8 @@ def wordthing(templocation,textslocation):
 
         for i in listval:
             listpercent.append(f": {round((i / val_mega * 100), 6)}")
+
+   #just printing
     def printw():
         print("---------------------------------------------")
 
@@ -92,9 +99,13 @@ def wordthing(templocation,textslocation):
 
         for number, letter in enumerate(listpercent):
             print(chr(number + 65), letter)
+
+   #uhh i dont really know i could probably fix this
     def megalist(x):
         global megatxt
         megatxt = listnew.pop(x)
+
+   #calculates percentages of each letter  (rework)
     def percent_calc(txt):
 
         val_text_mega = len(txt) - 1
@@ -135,6 +146,7 @@ def wordthing(templocation,textslocation):
         for i in listmegaval:
             listmegapercent.append(f": {round((i / val_text_mega * 100), 6)}")
 
+   #indepth analysis
     def inttest():
 
         o = int(input(f"please select index of list (1-{len(listnew)}): ")) - 1
