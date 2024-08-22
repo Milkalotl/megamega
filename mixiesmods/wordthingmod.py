@@ -11,7 +11,6 @@ def wordthing(templocation, txtslocation):
 
     if input("Press enter to start wording !!! Press 0 to cancel and go back : ") == "0":
         return
-
     openziesvar = input("Use temp (enter) or write your own!! (no-txt) !!! : ")+(".txt")
 
     if openziesvar == ".txt":
@@ -26,15 +25,14 @@ def wordthing(templocation, txtslocation):
         else:
             print(f"{txtslocation}{openziesvar}")
             openzies(f"{txtslocation}{openziesvar}")
+            openziesvar = f"{txtslocation}{openziesvar}"
 
     val_mega = len(txtval)
-    listval = []
-    listpercent = []
     listnew = []
-    meganewlist = []
     listmegaval = []
     listmegapercent = []
     megatxt = []
+    listexperi = []
 
     #custom letters
     def customs (x ="", y ="", z =""):
@@ -114,34 +112,54 @@ def wordthing(templocation, txtslocation):
         listmegaval.clear()
         listmegapercent.clear()
 
+    def experi(x:str):
+        listnew.clear()
+        listexperi.clear()
+        with open(x) as file:
+            while line := file.readline():
+                listnew.append(line)
+        l = len(listnew)
+        y = 0
+        charac = input("choose your letter: ").upper()
+        while y < l:
+            listexperi.append(listnew[y].count(charac))
+            y += 1
+        freqexperi = {}
+        for ele in listexperi:
+            if ele in freqexperi:
+                freqexperi[ele] += 1
+            else:
+                freqexperi[ele] = 1
+        print(freqexperi)
 
 
     #running wordthing
-
-
-    if input("Write 0 to input custom letters (up to 3): ") == "0":
-        x = input("letter: ")
-        y = input("letter: ")
-        z = input("letter: ")
-        if not ((x == "") and (y =="") and (z =="")):
-            customs(x, y, z)
-
-    else:
-        print("Ok! Startinnnnnnnnng")
-
-    charcounter(txtval, val_mega)
-
-    if input("0 for intensive test: ") == "0":
+    if input("Please select your mode: 0 for standard, 1 for experimental: ") == "1":
         w = "0"
         while w == "0":
-            listem(openziesvar)
-            inttest()
-            megatxt.clear
+            experi(openziesvar)
             w = input("0 to do it again: ")
-
-            
-
     else:
+        if input("Write 0 to input custom letters (up to 3): ") == "0":
+            x = input("letter: ")
+            y = input("letter: ")
+            z = input("letter: ")
+            if not ((x == "") and (y =="") and (z =="")):
+                customs(x, y, z)
+
+        else:
+            print("Ok! Startinnnnnnnnng")
+
+        charcounter(txtval, val_mega)
+
+        if input("0 for intensive test: ") == "0":
+            w = "0"
+            while w == "0":
+                listem(openziesvar)
+                inttest()
+                megatxt.clear
+                w = input("0 to do it again: ")
+
         print("\nThank you so much !!!")
 
 if __name__ == "__main__":
