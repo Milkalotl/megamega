@@ -11,3 +11,4 @@ virtualenv
 
 # PyCharm
 .idea
+/txts/
