@@ -12,3 +12,4 @@ virtualenv
 # PyCharm
 .idea
 /txts/
+/tests/
