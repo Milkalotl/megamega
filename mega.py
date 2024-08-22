@@ -1,6 +1,6 @@
 from colorama import Fore, Back, Style
 from ascii_magic import AsciiArt
-from mixiesmods import wordthingmod as wtm, remixermod as rxm
+from mixiesmods import wordthingmod as wtm, remixermod as rxm, mergemaster as mmg
 
 
 deflist = []
@@ -52,9 +52,15 @@ def main():
     print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}{Back.BLACK}!!!!! WELCOME !!!!!{Back.RESET}")
     print(f"{Back.RESET}What do you want to run (run setup on first time){Style.RESET_ALL}")
 
-    run = input(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}(r)emixer, {Fore.LIGHTCYAN_EX}(w)ord thingy, {Fore.LIGHTYELLOW_EX}(s)etup: {Style.RESET_ALL}").lower()
+    run = input(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}(r)emixer, {Fore.LIGHTMAGENTA_EX}(m)ergemaster, {Fore.LIGHTCYAN_EX}(w)ord thingy, {Fore.LIGHTYELLOW_EX}(s)etup: {Style.RESET_ALL}").lower()
 
     match run:
+        case "m":
+            mmg.merge(textslocation)
+            print("-----------------------\nMMMMMERGED!!!!!!!!!!!!!!")
+            main()
+
+
         case "r":
             rxm.remixer(templocation, textslocation)
             print("-----------------------\nAll remixed up !!!")

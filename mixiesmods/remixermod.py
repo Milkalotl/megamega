@@ -1,5 +1,4 @@
 from colorama import Fore, Style
-
 def remixer(templocation, textslocation):
     print(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★{Style.RESET_ALL}")
 
@@ -53,7 +52,7 @@ def remixer(templocation, textslocation):
 
             meganewtxt = newnewtxt.replace(".", "\n").replace("?", "\n").replace("!", "\n")
 
-    temp = open(templocation, "w", encoding="utf8").write(meganewtxt)
+s
     if input("0 to print: ") == "0":
         print(meganewtxt)
 
