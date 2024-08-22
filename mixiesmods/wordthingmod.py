@@ -1,4 +1,4 @@
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 def wordthing(templocation, txtslocation):
     print(f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}Welcome to the word thingy !!! Please follow the instructionszzz{Style.RESET_ALL}")
@@ -28,11 +28,10 @@ def wordthing(templocation, txtslocation):
             openziesvar = f"{txtslocation}{openziesvar}"
 
     val_mega = len(txtval)
-    listnew = []
     listmegaval = []
     listmegapercent = []
     megatxt = []
-    listexperi = []
+    listnew = []
 
     #custom letters
     def customs (x ="", y ="", z =""):
@@ -112,55 +111,76 @@ def wordthing(templocation, txtslocation):
         listmegaval.clear()
         listmegapercent.clear()
 
-    def experi(x:str):
-        listnew.clear()
-        listexperi.clear()
-        with open(x) as file:
-            while line := file.readline():
-                listnew.append(line)
+    def experi(x:str,charac):
+        listexperi = []
+        listem(x)
+
         l = len(listnew)
-        y = 0
-        charac = input("choose your letter: ").upper()
-        while y < l:
-            listexperi.append(listnew[y].count(charac))
-            y += 1
         freqexperi = {}
-        for ele in listexperi:
-            if ele in freqexperi:
-                freqexperi[ele] += 1
-            else:
-                freqexperi[ele] = 1
-        print(freqexperi)
+        y = 0
+        if str(listnew).count(charac) != 0:
+            while y < l:
+                listexperi.append(listnew[y].count(charac))
+                y += 1
+            for ele in listexperi:
+                if ele in freqexperi:
+                    freqexperi[ele] += 1
+                else:
+                    freqexperi[ele] = 1
+            w = sorted(freqexperi.items())
+            sorted_dict = {}
+            for key, value in w:
+                sorted_dict[key] = value
+            print(f"{charac}: {sorted_dict}")
 
+    def initexperimental():
+        uni = 65
+        while uni < 592:
+            experi(openziesvar, chr(uni))
+            uni += 1
+        print("\n------------------------------------\nthank you !!!")
+        quit()
 
-    #running wordthing
-    if input("Please select your mode: 0 for standard, 1 for experimental: ") == "1":
-        w = "0"
-        while w == "0":
-            experi(openziesvar)
-            w = input("0 to do it again: ")
-    else:
-        if input("Write 0 to input custom letters (up to 3): ") == "0":
-            x = input("letter: ")
-            y = input("letter: ")
-            z = input("letter: ")
-            if not ((x == "") and (y =="") and (z =="")):
-                customs(x, y, z)
+    # running wordthing
+    def run():
+        if input("Please select your mode: 0 for standard, 1 for experimental: ") == "1":
+           initexperimental()
 
         else:
-            print("Ok! Startinnnnnnnnng")
+            if input("Write 0 to input custom letters (up to 3): ") == "0":
+                x = input("letter: ")
+                y = input("letter: ")
+                z = input("letter: ")
+                if not ((x == "") and (y =="") and (z =="")):
+                    customs(x, y, z)
 
-        charcounter(txtval, val_mega)
+            else:
+                print("Ok! Startinnnnnnnnng")
 
-        if input("0 for intensive test: ") == "0":
-            w = "0"
-            while w == "0":
-                listem(openziesvar)
-                inttest()
-                megatxt.clear
-                w = input("0 to do it again: ")
+            charcounter(txtval, val_mega)
+            www = input("0 for intensive test: \n1 for experimental test: ")
+            if www == "0":
+                w = "0"
+                while w == "0":
+                    listem(openziesvar)
+                    inttest()
+                    # megatxt.clear
+                    w = input("0 to do it again: ")
+            elif www == "1":
+                initexperimental()
 
-        print("\nThank you so much !!!")
+            print("\nThank you so much !!!")
+            quit()
+
+    def quit():
+        if input(f"{Fore.LIGHTYELLOW_EX}{Style.BRIGHT}(q)uit ? {Fore.LIGHTWHITE_EX}or {Fore.LIGHTCYAN_EX}{Style.BRIGHT}(r)un?{Style.RESET_ALL} ") == "r":
+            run()
+
+
+
+
+
+    run()
 
 if __name__ == "__main__":
     def main():
