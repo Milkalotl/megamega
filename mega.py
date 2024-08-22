@@ -33,7 +33,7 @@ def setup():
     global textslocation
 
     templocation = "/home/mooky/PycharmProjects/megamega/temp.txt"
-    textslocation = "/home/mooky/PycharmProjects/megamega/texts/"
+    textslocation = "/home/mooky/PycharmProjects/megamega/txts/"
 
     try:
         templocation or textslocation
