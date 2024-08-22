@@ -1,7 +1,9 @@
-def remixer(templocation, textslocation):
-    print("★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★")
+from colorama import Fore, Style
 
-    if input("Press enter to start ★ remixing ★ !!! Press 0 to cancel and go back : ") == "0":
+def remixer(templocation, textslocation):
+    print(f"{Fore.LIGHTRED_EX}{Style.BRIGHT}★ ★ This is the remixer !!! Deleting your special characters since 1995 ★ ★{Style.RESET_ALL}")
+
+    if input(f"Press enter to start{Fore.LIGHTRED_EX}{Style.BRIGHT} ★ remixing ★ {Style.RESET_ALL}!!! Press 0 to cancel and go back : ") == "0":
         return
 
     def askforinput(txloc):

@@ -1,7 +1,7 @@
-
+from colorama import Fore, Back, Style
 
 def wordthing(templocation, txtslocation):
-    print("Welcome to the word thingy !!! Please follow the instructionszzz")
+    print(f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}Welcome to the word thingy !!! Please follow the instructionszzz{Style.RESET_ALL}")
 
     # declaring variables and opening temp
     def openzies(x:str):

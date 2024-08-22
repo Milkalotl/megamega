@@ -1,30 +1,46 @@
-import json
+from __future__ import annotations
+from typing import TYPE_CHECKING
 
-def charcounter(txt, lengthoftxt):
-    # letter values !!!
-    print("Characters !!!\n")
+if TYPE_CHECKING:
+    from typing import Optional, Literal
 
-    mySet = set(txt)
-    for element in mySet:
-        countOfChar = 0
-        for char in txt:
-            if char == element:
-                if ('A' <= char <= 'Z') or ('a' <= char <= 'z') or ('À' <= char <= 'ỿ') or (char == ".") or (
-                        char == "?") or (char == "!") or (char == " "):
-                    countOfChar += 1
-
-        print("{}: {} p: {}% ".format(element, countOfChar, f"{round((countOfChar / lengthoftxt * 100), 6)}"))
-#########################################
-def supercharcounter(txt, lengthoftxt):
-    # letter values !!!
+import time
+from subprocess import Popen
 
 
+def watch_options(
+    popen: Popen,
+    player: Player,
+    platform: SUPPORTED_PLATFORMS,
+    media: Media,
+    fzf_enabled: bool
+) -> Optional[Literal["next", "previous", "select"]]:
+    options = [
+        "replay",
+        "quit"
+    ]
 
+    if isinstance(media, Multi):
+        options.insert(0, "next")
+        options.insert(1, "previous")
+        options.insert(2, "select")
+    choice = prompt(
+        text = f"Playing '{media.display_name}'",
+        choices = options,
+        display = lambda x: x,
+        fzf_enabled = fzf_enabled
+    )
 
+    if choice == "quit":
+        popen.kill()
 
-with open("/home/mooky/PycharmProjects/megamega/temp.txt", encoding="utf8") as f:
-            txt = f.read()
+    elif choice == "replay":
+        popen.kill()
 
-lengtext = len(txt)
-#charcounter(txt,lengtext)
-supercharcounter(txt,lengtext)
+        new_popen = player.play(media)
+
+        return watch_options(
+            new_popen, player, platform, media, fzf_enabled
+        )
+
+    return choice
