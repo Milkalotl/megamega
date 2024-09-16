@@ -11,12 +11,14 @@ def merge(txtslocation):
             print("only {0} left".format(zz-x-1))
     data = ""
     for elem in filedictionary:
-        with open(f'{txtslocation}{filedictionary[elem]}.txt') as fp:
+        with open(f'{txtslocation}{filedictionary[elem]}.txt', "r") as fp:
             data += fp.read()
             data += "\n\n"
 
 
-    open(f'{txtslocation}filemax.txt', 'w').write(data)
+    f = open(f'{txtslocation}..filemax.txt', 'w')
+    f.write(data)
+    f.close()
     print("All done !!!")
 
 if __name__ == "__main__":

@@ -1,27 +1,8 @@
 from colorama import Fore, Back, Style
 from ascii_magic import AsciiArt
 from mixiesmods import wordthingmod as wtm, remixermod as rxm, mergemaster as mmg
-
-
-deflist = []
-
-with open("defaults.txt", encoding="utf8") as file:
-    while line := file.readline():
-        deflist.append(line)
-
-defaulttemp = deflist[0]
-defaulttexts = deflist[1]
-
-
-def custom_setup():
-
-    templocation = input("set templocation directory: ")
-    textslocation = input("set textslocation directory: ")
-
-    if input("Save to file? (y) (n)") == "y":
-        with open("defaults.txt", encoding="utf8") as file:
-            file.write(f"{templocation}\n{textslocation}")
-    main()
+from matplotlib import pyplot as plt
+import matplotlib as mpl
 
 def setup():
     global templocation
@@ -38,11 +19,8 @@ def setup():
         print("-----------------------\nAll set up !!!")
         main()
 def truesetup():
-    if input("(c)ustom setup or (d)efault: ") == "c":
-        custom_setup()
-    else:
-        templocation = "./temp.txt"
-        textslocation = "./texts"
+    templocation = "./temp.txt"
+    textslocation = "./txts"
     if templocation == "":
         templocation = "./temp.txt"
     if textslocation == "":
@@ -77,13 +55,16 @@ def main():
             main()
 
         case "sunny":
-            my_art = AsciiArt.from_image('sunny.png')
+            my_art = AsciiArt.from_image('images/sunny.png')
             my_art.to_terminal()
         case "q"|"quit":
             quit()
         case "ts":
             truesetup()
             main()
+        case "mpl":
+            plottest()
+        
         case other:
             try:
                 templocation or textslocation
@@ -94,9 +75,10 @@ def main():
                 main()
 
 
+def plottest():
+    mpl.__file__
 
-
-my_art = AsciiArt.from_image('welcome.png')
+my_art = AsciiArt.from_image('images/welcome.png')
 my_art.to_terminal(columns=80, width_ratio=2.5)
 setup()
 main()

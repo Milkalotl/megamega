@@ -8,8 +8,4 @@
 /sandbox/
 /tags
 virtualenv
-
-# PyCharm
-.idea
 /txts/
-/tests/
