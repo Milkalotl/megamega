@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+from matplotlib import pyplot as plt
 
 def wordthing(templocation, txtslocation):
     print(f"{Fore.LIGHTCYAN_EX}{Style.BRIGHT}Welcome to the word thingy !!! Please follow the instructionszzz{Style.RESET_ALL}")
@@ -90,6 +91,7 @@ def wordthing(templocation, txtslocation):
     #indepth analysis
     def inttest():
         o = int(input(f"please select index of list (1-{len(listnew)}): ")) - 1
+        
         try:
             listnew[o]
         except IndexError:
@@ -131,13 +133,43 @@ def wordthing(templocation, txtslocation):
             sorted_dict = {}
             for key, value in w:
                 sorted_dict[key] = value
-            print(f"{charac}: {sorted_dict}")
+            
+            # prints out the letter, and then the dictionary !!!
+            print(f"{charac}: {sorted_dict}\n")
+            return sorted_dict, charac
+
 
     def initexperimental():
+
         uni = 65
-        while uni < 592:
-            experi(openziesvar, chr(uni))
+        inp = input("1 for individual, 0 for big one !! : ")
+        rtf = open("./results.txt","w")
+        rtf.write("")
+        rtf.close()
+        rtf = open("./results.txt", "a")
+        colortable = ["lightcoral", "sienna", "darkorange", "darkgoldenrod", "gold", "yellowgreen", "greenyellow", "turquoise", "darkslategray", "deepskyblue", "steelblue", "mediumblue", "mediumslateblue", "darkorchid", "plum", "fuchsia", "mediumvioletred", "crimson", "orange", "red", "dimgray", "lightgray", "chocolate", "indigo", "black", "peru"]
+        while uni <= 90: #this is only for english
+            try:
+                sorted_dict,charac = experi(openziesvar, chr(uni))
+            except TypeError as e:
+                print(e)
+            else:    
+                rtf.write(f"{charac}: {sorted_dict}\n")
+                k = uni-65
+                plt.axis([0, 40, 0, 30000])
+                plt.plot(range(len(sorted_dict)), list(sorted_dict.values()), label = charac, color = colortable[k], marker = "*")
+                if inp == "1":
+                    plt.title(f"Frequency of {charac} !!")
+                    plt.grid(True)
+                    plt.show()
             uni += 1
+        rtf.close()
+        leg = plt.legend(loc='upper center')
+        plt.ylabel("frequency per sentence in text")
+        plt.xlabel("number of times in a sentence")
+        plt.grid(True)
+        plt.xticks([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40])
+        plt.show()
         print("\n------------------------------------\nthank you !!!")
         quit()
 

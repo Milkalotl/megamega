@@ -6,7 +6,9 @@ def remixer(templocation, textslocation):
         return
 
     def askforinput(txloc):
-        x = input("Write your filename please (no.txt) !!!: ")
+        x = input("Write your filename please (no.txt) or use filemax with 0 !!!: ")
+        if x == "0":
+            x = "..filemax"
         y = f"{txloc}{x}.txt"
         z = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
         return y, z
@@ -52,9 +54,17 @@ def remixer(templocation, textslocation):
 
             meganewtxt = newnewtxt.replace(".", "\n").replace("?", "\n").replace("!", "\n")
 
-s
+    f = open(templocation, "w")
+    f.write(meganewtxt)
+    f.close()
+    
     if input("0 to print: ") == "0":
-        print(meganewtxt)
+        f = open(templocation, "r")
+        print(f.read())
+        f.close()
+    
+    
+    
 
     print("\n------------------------------------\nthank you !!!")
 
