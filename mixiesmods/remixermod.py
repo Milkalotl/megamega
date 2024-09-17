@@ -4,32 +4,33 @@ def remixer(templocation, textslocation):
 
     if input(f"Press enter to start{Fore.LIGHTRED_EX}{Style.BRIGHT} ★ remixing ★ {Style.RESET_ALL}!!! Press 0 to cancel and go back : ") == "0":
         return
+    while (1):
+        def askforinput(txloc):
+            x = input("Write your filename please (no.txt) or use filemax with 0 !!!: ")
+            if x == "0":
+                x = "..filemax"
+            y = f"{txloc}{x}.txt"
+            z = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
+            return y, z
 
-    def askforinput(txloc):
-        x = input("Write your filename please (no.txt) or use filemax with 0 !!!: ")
-        if x == "0":
-            x = "..filemax"
-        y = f"{txloc}{x}.txt"
-        z = input("and the encoding !!! Choose Latin-1 (1), UTF-8 (2), or custom (3) !!!: ")
-        return y, z
+        filemane, enco = askforinput(textslocation)
 
-    filemane, enco = askforinput(textslocation)
+        match enco:
+            case "1":
+                enco = "latin1"
+            case "2":
+                enco = "utf8"
+            case _:
+                enco = input("Please specify: ")
 
-    match enco:
-        case "1":
-            enco = "latin1"
-        case "2":
-            enco = "utf8"
-        case _:
-            enco = input("Please specify: ")
-
-    try:
-        open(filemane, encoding=enco)
-    except FileNotFoundError:
-        print("oops wrong file name or encoding! Try again !!!")
-        remixer(templocation, textslocation)
-    else:
-        text = open(filemane, encoding=enco).read()
+        try:
+            open(filemane, encoding=enco)
+        except FileNotFoundError:
+            print("oops wrong file name or encoding! Try again !!!")
+            continue
+        else:
+            text = open(filemane, encoding=enco).read()
+            break
 
     match input("please specify if you want line breaks (1), no line breaks (2), or spaces AND linebreaks (3): "):
         case "2":
