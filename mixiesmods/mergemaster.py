@@ -20,28 +20,25 @@ def merge(txtslocation):
             tempdata = ""
             tempdata += fp.read()
             substring = "***"
-            xid = 0
+            xid = 0 
             indx = 0
-            try:
+            
+            if (guten == "1") and (tempdata.find(substring)!= -1):
                 while xid <=2:
                     if xid != 2:
                         indx = tempdata.find(substring, indx+2)
                     else:
                         endx = tempdata.find(substring, indx+2)
                     xid += 1
-            except ValueError:
-                print("Not found!")
-            else: 
-                print(indx)
-                data += tempdata[indx+3:endx]
-                data += "\n\n"
+                data += f"{tempdata[indx+3:endx]}\n\n"
+            else:
+                data += f"{tempdata}\n\n"
 
 
     f = open(f'{txtslocation}..filemax.txt', 'w')
     f.write(data)
     f.close()
     print("All done !!!")
-    print(data)
 
 if __name__ == "__main__":
     merge("./txts/")
