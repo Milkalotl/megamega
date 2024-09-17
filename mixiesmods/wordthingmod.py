@@ -132,7 +132,7 @@ def wordthing(templocation, txtslocation):
             w = sorted(freqexperi.items())
             sorted_dict = {}
             for key, value in w:
-                sorted_dict[key] = value
+                sorted_dict[key] = value //  * 1000
             
             # prints out the letter, and then the dictionary !!!
             print(f"{charac}: {sorted_dict}\n")
