@@ -156,8 +156,7 @@ def wordthing(templocation, txtslocation):
         rtf = open("./results.txt", "a")
         listem(openziesvar)
         l = len(listnew)
-        linetable = ["-", "-.", "--", ":"]
-        markertable = ["o", "v", "D", "H", "*", "X"]
+        markertable = ["o", "P", "D", "H", "8", "X"]
         while uni <= 90: #this is only for english
             try:
                 sorted_dict, charac = experi(chr(uni), listnew, l, norm)
@@ -171,7 +170,7 @@ def wordthing(templocation, txtslocation):
                 else:
                     plt.axis([0, 40, 0, l])
                 rtf.write(f"{charac}: {sorted_dict}\n\n")
-                plt.plot(range(len(sorted_dict)), list(sorted_dict.values()), label = charac, marker = markertable[k%6], linestyle = linetable[k%4])
+                plt.plot(range(len(sorted_dict)), list(sorted_dict.values()), label = charac, marker = markertable[k%6])
                 if inp == "1":
                     plt.title(f"Frequency of {charac} !!")
                     plt.grid(True)

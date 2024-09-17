@@ -2,19 +2,49 @@ from colorama import Fore, Style
 def merge(txtslocation):
     print(f"{Style.BRIGHT}{Fore.LIGHTMAGENTA_EX}THIS IS THE {Fore.LIGHTWHITE_EX}*car crash sfx* {Fore.LIGHTMAGENTA_EX} MERGE MASTER {Fore.LIGHTWHITE_EX}*elephant toot* MERGING YOUR DUMB SHIT SINCE BEFORE THOSE {Fore.LIGHTRED_EX}FUCKS{Fore.LIGHTWHITE_EX} AT REMIXER")
     print(f"{Fore.LIGHTMAGENTA_EX} NOW PLAYING: MERRRRRRRRRRRGEEEEEEEEEE MASSSSSSSSTERRRRRRRRRR {Style.RESET_ALL}")
-
+    if input("You are going to rewrite filemax !!! if you arent sure and want to (q)uit, do so now: ") == "q":
+        return
+    
     filedictionary = {}
+    
     guten = input("Are you using one or more project gutenberg books? (1) yes, (0) no : ")
-
-    
-    zz = int(input("how many files do you want to join? ")) + 1
-    
+    zz = x =  1
     data = ""
-    for x in range(1, zz):
-        filedictionary["file{0}".format(x)] = input("File name: ")
-        if zz-x-1 != 0:
-            print("only {0} left".format(zz-x-1))
+    print("You can print your list by writing *p !!")
+    print("MERGE TIME")
+
+    while x <= zz:
+        fn = input(f"File({x}) name: ")
+        if fn != "":
+            if fn == "*p":
+                print(f"your files:")
+                for elem in filedictionary.values():
+                    print(f"|| {elem} ", end="")
+                    
+                print("||")
+                zz-=1
+                x-=1
+
+            else:
+                filedictionary[f"file{x}"] = fn
+            zz += 1
+                
+        x +=1
     
+    print("\nAny names you wanna edit (enter to skip)? : \n")
+    editf = "x"
+    while (editf != ""):
+        x = 1
+        for elem in filedictionary.values():
+            print(f"|| {x}: {elem} ", end="")
+            x +=1              
+        print("||")
+        editf = input("\nEnter number (or enter to skip): ")
+        if editf != "":
+            filedictionary[f"file{int(editf)}"] = input("new name: ")
+        
+
+
     for elem in filedictionary:
         with open(f'{txtslocation}{filedictionary[elem]}.txt', "r") as fp:
             tempdata = ""
