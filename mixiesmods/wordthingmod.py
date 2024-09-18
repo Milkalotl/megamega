@@ -119,7 +119,7 @@ def wordthing(templocation, txtslocation):
 # PLOTTING !!!!!!
 
 
-    def experi(charac, listnew, l, norm):
+    def experi(charac, listnew, l, norm, typey):
         listexperi = []
         freqexperi = {}
         y = 0
@@ -139,7 +139,24 @@ def wordthing(templocation, txtslocation):
                     sorted_dict[key] = int(value/l*1000)
                 else:
                     sorted_dict[key] = value
-            
+           
+
+            if typey == "1":
+                x = buff = w = 0
+                y = list(sorted_dict.keys())
+                y = y[-1]
+                while x <= y-1:
+                    try:
+                        w = sorted_dict.get(y-x+buff)
+                        sorted_dict[y-(x+1)] += w
+                    except (KeyError, TypeError):
+                        buff+=1
+                        pass
+                    else:
+                        buff = 0
+                    w = 0
+                    x+=1
+    
             # prints out the letter, and then the dictionary !!!
             print(f"raw: {charac}: {sorted_dict}\n")
             return sorted_dict, charac
@@ -150,16 +167,17 @@ def wordthing(templocation, txtslocation):
         uni = 65
         inp = input("1 for individual, 0 for big one !! : ")
         norm = input("(1)normalized, or (0)raw? : ")
+        typey = input("(1) additive or (0) unique? : ")
         rtf = open("./results.txt","w")
         rtf.write("")
         rtf.close()
         rtf = open("./results.txt", "a")
         listem(openziesvar)
         l = len(listnew)
-        markertable = ["o", "P", "D", "H", "8", "X"]
+        markertable = ["o", "P", "D", "H", "*", "X"]
         while uni <= 90: #this is only for english
             try:
-                sorted_dict, charac = experi(chr(uni), listnew, l, norm)
+                sorted_dict, charac = experi(chr(uni), listnew, l, norm, typey)
             except TypeError as e:
                 print(e)
             else:    
@@ -232,5 +250,5 @@ def wordthing(templocation, txtslocation):
 
 if __name__ == "__main__":
     def main():
-        wordthing("/home/mooky/PycharmProjects/megamega/temp.txt", "/home/mooky/PycharmProjects/megamega/txts/")
+        wordthing("./temp.txt", "./txts/")
     main()

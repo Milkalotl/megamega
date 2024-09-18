@@ -1,46 +1,20 @@
-from __future__ import annotations
-from typing import TYPE_CHECKING
+dict = {0: 25993, 1: 1910, 2: 158, 3: 11, 4: 1, 7:2}
+x = buff = w = 0
+y = list(dict.keys())
+y = y[-1]
+while x <= y-1:
+    try:
+        w = dict.get(y-x+buff)
+        dict[y-(x+1)] += w
+    except (KeyError, TypeError):
+        buff+=1
+        pass
+    else:
+        buff = 0
+    w = 0
+    x+=1
 
-if TYPE_CHECKING:
-    from typing import Optional, Literal
+print(dict)
 
-import time
-from subprocess import Popen
-
-
-def watch_options(
-    popen: Popen,
-    player: Player,
-    platform: SUPPORTED_PLATFORMS,
-    media: Media,
-    fzf_enabled: bool
-) -> Optional[Literal["next", "previous", "select"]]:
-    options = [
-        "replay",
-        "quit"
-    ]
-
-    if isinstance(media, Multi):
-        options.insert(0, "next")
-        options.insert(1, "previous")
-        options.insert(2, "select")
-    choice = prompt(
-        text = f"Playing '{media.display_name}'",
-        choices = options,
-        display = lambda x: x,
-        fzf_enabled = fzf_enabled
-    )
-
-    if choice == "quit":
-        popen.kill()
-
-    elif choice == "replay":
-        popen.kill()
-
-        new_popen = player.play(media)
-
-        return watch_options(
-            new_popen, player, platform, media, fzf_enabled
-        )
-
-    return choice
+#while x > (y*-1):
+ #   dict.values()
