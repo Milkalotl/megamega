@@ -115,8 +115,6 @@ def wordthing(templocation, txtslocation):
 
     def experi(x:str,charac):
         listexperi = []
-        listem(x)
-
         l = len(listnew)
         freqexperi = {}
         y = 0
@@ -148,7 +146,9 @@ def wordthing(templocation, txtslocation):
         rtf.close()
         rtf = open("./results.txt", "a")
         colortable = ["lightcoral", "sienna", "darkorange", "darkgoldenrod", "gold", "yellowgreen", "greenyellow", "turquoise", "darkslategray", "deepskyblue", "steelblue", "mediumblue", "mediumslateblue", "darkorchid", "plum", "fuchsia", "mediumvioletred", "crimson", "orange", "red", "dimgray", "lightgray", "chocolate", "indigo", "black", "peru"]
-        while uni <= 90: #this is only for english
+        
+							listem(openziesvar)
+							while uni <= 90: #this is only for english
             try:
                 sorted_dict,charac = experi(openziesvar, chr(uni))
             except TypeError as e:
